@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>کارتابل — کارهای تیم شما، همیشه روی میز درست</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #f4f5f8;
+    --surface: #ffffff;
+    --ink: #16213a;
+    --ink-soft: #4a5468;
+    --border: #e3e6ee;
+    --primary: #2f5fed;
+    --primary-dark: #1f43c4;
+    --primary-tint: #eaf0ff;
+    --amber: #f5a524;
+    --amber-tint: #fef3e0;
+    --green: #16a34a;
+    --green-tint: #e8f8ee;
+    --font: 'Vazirmatn', sans-serif;
+    --radius: 14px;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.75;
+  }
+  img,svg{ display:block; max-width:100%; }
+  a{ color:inherit; text-decoration:none; }
+  .container{ max-width: 1120px; margin:0 auto; padding: 0 24px; }
+  section{ padding: 88px 0; }
+  h1,h2,h3{ color: var(--ink); font-weight: 800; }
+
+  /* ---------- Nav ---------- */
+  header.nav{
+    position: sticky; top:0; z-index: 100;
+    background: rgba(244,245,248,.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner{
+    max-width: 1120px; margin:0 auto; padding: 16px 24px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .logo{ display:flex; align-items:center; gap:10px; font-weight:800; font-size:19px; }
+  .logo-mark{
+    width:32px; height:32px; border-radius:9px;
+    background: linear-gradient(135deg, var(--primary), #6f8cff);
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-size:15px; font-weight:800;
+  }
+  .nav-links{ display:flex; gap:32px; font-size:14.5px; color:var(--ink-soft); }
+  .nav-links a:hover{ color:var(--primary); }
+  .nav-cta{
+    background: var(--primary); color:#fff; padding:10px 22px;
+    border-radius: 999px; font-size: 14.5px; font-weight:600;
+    transition: background .15s;
+  }
+  .nav-cta:hover{ background: var(--primary-dark); }
+  @media (max-width: 760px){ .nav-links{ display:none; } }
+
+  /* ---------- Hero ---------- */
+  .hero{ padding-top: 76px; padding-bottom: 40px; }
+  .hero-grid{
+    display:grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items:center;
+  }
+  @media (max-width: 900px){ .hero-grid{ grid-template-columns: 1fr; } }
+
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    background: var(--primary-tint); color: var(--primary);
+    font-size: 13px; font-weight:600; padding: 6px 14px; border-radius: 999px;
+    margin-bottom: 22px;
+  }
+  .eyebrow .dot{ width:6px; height:6px; border-radius:50%; background: var(--primary); }
+  .hero h1{ font-size: clamp(30px, 4vw, 46px); line-height: 1.45; }
+  .hero h1 span{ color: var(--primary); }
+  .hero p.lead{ margin-top: 20px; font-size: 17px; color: var(--ink-soft); max-width: 46ch; }
+  .hero-actions{ display:flex; gap:14px; margin-top: 32px; flex-wrap:wrap; }
+  .btn-primary{
+    background: var(--primary); color:#fff; padding: 14px 28px;
+    border-radius: 12px; font-weight:700; font-size:15px;
+    transition: transform .15s, background .15s;
+  }
+  .btn-primary:hover{ background: var(--primary-dark); transform: translateY(-1px); }
+  .btn-ghost{
+    background: var(--surface); color: var(--ink); padding: 14px 28px;
+    border-radius: 12px; font-weight:600; font-size:15px; border: 1px solid var(--border);
+    transition: border-color .15s;
+  }
+  .btn-ghost:hover{ border-color: var(--primary); }
+  .hero-trust{ margin-top: 26px; font-size: 13px; color: var(--ink-soft); }
+
+  /* ---------- Hero visual: live kartabl mock ---------- */
+  .mock{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: 0 20px 50px -20px rgba(22,33,58,.18);
+    overflow: hidden;
+  }
+  .mock-head{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 16px 20px; border-bottom: 1px solid var(--border);
+  }
+  .mock-head-title{ font-weight:700; font-size:14.5px; }
+  .mock-head-sub{ font-size:12px; color: var(--ink-soft); margin-top:2px; }
+  .mock-avatars{ display:flex; }
+  .mock-avatar{
+    width:26px; height:26px; border-radius:50%; border: 2px solid var(--surface);
+    margin-inline-start: -8px; background: linear-gradient(135deg,#c7d2fe,#a5b4fc);
+  }
+  .mock-body{ padding: 14px 16px 20px; display:flex; flex-direction:column; gap:10px; }
+  .task-row{
+    display:flex; align-items:center; gap:12px;
+    background: #fbfbfd; border: 1px solid var(--border); border-radius: 10px;
+    padding: 12px 14px;
+    opacity:0; transform: translateY(8px);
+    animation: rise .5s ease forwards;
+  }
+  .task-row:nth-child(1){ animation-delay: .1s; }
+  .task-row:nth-child(2){ animation-delay: .22s; }
+  .task-row:nth-child(3){ animation-delay: .34s; }
+  .task-row:nth-child(4){ animation-delay: .46s; }
+  @keyframes rise{ to{ opacity:1; transform: translateY(0); } }
+  .task-check{ width:18px; height:18px; border-radius:6px; border: 2px solid var(--border); flex-shrink:0; }
+  .task-check.done{ background: var(--green); border-color: var(--green); position:relative; }
+  .task-check.done::after{ content:"✓"; color:#fff; font-size:11px; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; }
+  .task-name{ flex:1; font-size:13.5px; }
+  .task-name.strike{ text-decoration: line-through; color: var(--ink-soft); }
+  .badge{ font-size: 11.5px; font-weight:600; padding: 4px 10px; border-radius: 999px; white-space:nowrap; }
+  .badge.wait{ background: var(--amber-tint); color: #a86400; }
+  .badge.progress{ background: var(--primary-tint); color: var(--primary-dark); }
+  .badge.done{ background: var(--green-tint); color: #0f7a3a; }
+
+  /* ---------- Logos strip ---------- */
+  .logos{ padding: 40px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .logos-label{ text-align:center; font-size: 12.5px; color: var(--ink-soft); margin-bottom: 22px; letter-spacing:.03em; }
+  .logos-row{ display:flex; justify-content:center; gap:48px; flex-wrap:wrap; opacity:.55; font-weight:700; font-size: 16px; color: var(--ink-soft); }
+
+  /* ---------- Features ---------- */
+  .section-head{ max-width: 620px; margin: 0 auto 52px; text-align:center; }
+  .section-head h2{ font-size: clamp(24px,3vw,32px); }
+  .section-head p{ margin-top:14px; color: var(--ink-soft); font-size:15.5px; }
+
+  .features-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 860px){ .features-grid{ grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px){ .features-grid{ grid-template-columns: 1fr; } }
+  .feature-card{
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 26px 24px; transition: transform .15s, box-shadow .15s;
+  }
+  .feature-card:hover{ transform: translateY(-4px); box-shadow: 0 16px 30px -18px rgba(22,33,58,.2); }
+  .feature-icon{
+    width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center;
+    font-size:20px; margin-bottom:16px;
+  }
+  .feature-card h3{ font-size: 16.5px; }
+  .feature-card p{ margin-top:8px; font-size: 14px; color: var(--ink-soft); }
+
+  /* ---------- Workflow strip ---------- */
+  .workflow{ background: var(--ink); border-radius: 22px; padding: 56px 40px; color:#fff; }
+  .workflow-inner{ display:grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items:center; }
+  @media (max-width: 860px){ .workflow-inner{ grid-template-columns:1fr; } }
+  .workflow h2{ color:#fff; font-size: clamp(22px,3vw,28px); }
+  .workflow p{ margin-top:14px; color: #b9c1d6; font-size:15px; }
+  .workflow-steps{ display:flex; flex-direction:column; gap:14px; margin-top:24px; }
+  .w-step{ display:flex; gap:12px; align-items:flex-start; font-size:14px; color:#dfe4f2; }
+  .w-step .n{ width:24px; height:24px; border-radius:50%; background:#26325a; display:flex; align-items:center; justify-content:center; font-size:12px; flex-shrink:0; color:#9fb3ff; }
+  .workflow-visual{ background:#101a34; border-radius:16px; padding:22px; border:1px solid #26325a; }
+  .stat-row{ display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid #26325a; }
+  .stat-row:last-child{ border-bottom:none; }
+  .stat-label{ font-size:13px; color:#9fb0d0; }
+  .stat-value{ font-weight:800; font-size:18px; }
+  .stat-value.up{ color:#5ee6a0; }
+
+  /* ---------- CTA ---------- */
+  .cta{ text-align:center; }
+  .cta-box{
+    background: linear-gradient(135deg, var(--primary), #6f8cff);
+    border-radius: 22px; padding: 64px 32px; color:#fff;
+  }
+  .cta-box h2{ color:#fff; font-size: clamp(24px,3vw,32px); }
+  .cta-box p{ margin-top:12px; color:#dfe6ff; font-size:15.5px; }
+  .cta-box .btn-primary{ background:#fff; color: var(--primary-dark); margin-top:26px; display:inline-block; }
+  .cta-box .btn-primary:hover{ background:#f2f4ff; }
+
+  /* ---------- Footer ---------- */
+  footer{ padding: 64px 0 0; border-top:1px solid var(--border); background: var(--surface); }
+  .footer-grid{
+    display:grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 40px;
+    padding-bottom: 48px;
+  }
+  @media (max-width: 860px){ .footer-grid{ grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 540px){ .footer-grid{ grid-template-columns: 1fr; } }
+
+  .footer-brand p{ margin-top:14px; font-size: 13.5px; color: var(--ink-soft); max-width: 32ch; }
+  .footer-social{ display:flex; gap:10px; margin-top:20px; }
+  .footer-social a{
+    width:36px; height:36px; border-radius:10px; border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center; font-size:14px;
+    color: var(--ink-soft); transition: border-color .15s, color .15s;
+  }
+  .footer-social a:hover{ border-color: var(--primary); color: var(--primary); }
+
+  .footer-col h4{ font-size: 13.5px; color: var(--ink); margin-bottom: 18px; }
+  .footer-col ul{ list-style:none; display:flex; flex-direction:column; gap:12px; }
+  .footer-col a{ font-size: 13.5px; color: var(--ink-soft); transition: color .15s; }
+  .footer-col a:hover{ color: var(--primary); }
+
+  .footer-contact li{ display:flex; align-items:flex-start; gap:10px; font-size: 13.5px; color: var(--ink-soft); }
+  .footer-contact .ico{ flex-shrink:0; }
+
+  .footer-bottom{
+    border-top: 1px solid var(--border);
+    padding: 20px 0;
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  }
+  .footer-bottom-links{ display:flex; gap:20px; font-size:12.5px; color: var(--ink-soft); }
+  .footer-note{ font-size:12.5px; color: var(--ink-soft); }
+</style>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="nav-inner">
+      <div class="logo"><span class="logo-mark">ک</span> کارتابل</div>
+      <nav class="nav-links">
+        <a href="#features">ویژگی‌ها</a>
+        <a href="#workflow">نحوه کار</a>
+        <a href="#cta">قیمت‌گذاری</a>
+      </nav>
+      <a href="#cta" class="nav-cta">شروع </a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow"><span class="dot"></span> ساخته‌شده برای تیم‌های سازمانی</div>
+        <h1>کارهای تیم شما،<br>به‌جای گم‌شدن تو ایمیل و واتس‌اپ،<br><span>روی میز درستش می‌مونه.</span></h1>
+        <p class="lead">
+          کارتابل یک فضای کاری ساده برای سپردن، پیگیری و تکمیل وظایف سازمانی‌ست؛
+          بدون پیچیدگی‌های اضافه، دقیقاً همون چیزی که یک تیم برای هماهنگ‌موندن نیاز داره.
+        </p>
+        <div class="hero-actions">
+          <a href="#cta" class="btn-primary">شروع  →</a>
+          <a href="#workflow" class="btn-ghost">دیدن نحوه کار</a>
+        </div>
+      </div>
+
+      <div class="mock">
+        <div class="mock-head">
+          <div>
+            <div class="mock-head-title">کارتابل هفتگی تیم محصول</div>
+            <div class="mock-head-sub">۴ وظیفه · بروزرسانی چند لحظه پیش</div>
+          </div>
+          <div class="mock-avatars">
+            <div class="mock-avatar"></div>
+            <div class="mock-avatar"></div>
+            <div class="mock-avatar"></div>
+          </div>
+        </div>
+        <div class="mock-body">
+          <div class="task-row">
+            <div class="task-check"></div>
+            <div class="task-name">بازطراحی صفحه ورود کاربران</div>
+            <span class="badge progress">در حال انجام</span>
+          </div>
+          <div class="task-row">
+            <div class="task-check"></div>
+            <div class="task-name">هماهنگی جلسه با تیم فروش</div>
+            <span class="badge wait">در انتظار</span>
+          </div>
+          <div class="task-row">
+            <div class="task-check done"></div>
+            <div class="task-name strike">تست نسخه جدید اپلیکیشن</div>
+            <span class="badge done">تکمیل شده</span>
+          </div>
+          <div class="task-row">
+            <div class="task-check"></div>
+            <div class="task-name">آماده‌سازی گزارش ماهانه</div>
+            <span class="badge wait">در انتظار</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="container">
+      <div class="section-head">
+        <h2>هر چیزی که یک تیم برای هماهنگی نیاز داره</h2>
+        <p>بدون فرم‌های پیچیده و منوهای تودرتو؛ فقط ابزارهایی که واقعاً استفاده می‌کنید.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon" style="background:var(--primary-tint)">📋</div>
+          <h3>مدیریت وظایف</h3>
+          <p>وظیفه بسازید، مسئولش رو مشخص کنید و پیشرفتش رو در یک نگاه ببینید.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:var(--amber-tint)">📊</div>
+          <h3>گزارش زنده</h3>
+          <p>بدون نیاز به جلسه، وضعیت کل تیم رو در یک داشبورد ساده دنبال کنید.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:var(--green-tint)">👥</div>
+          <h3>همکاری تیمی</h3>
+          <p>نظر بدید، فایل به‌اشتراک بذارید و همه‌چیز رو در یک‌جا نگه دارید.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:var(--primary-tint)">🔔</div>
+          <h3>یادآوری هوشمند</h3>
+          <p>کارتابل خودش یادتون میاره، پس نیازی نیست خودتون همه‌چیز رو به‌خاطر بسپارید.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:var(--amber-tint)">🔐</div>
+          <h3>دسترسی سطح‌بندی‌شده</h3>
+          <p>هر عضو تیم فقط چیزی رو می‌بینه که بهش مربوطه.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:var(--green-tint)">🔗</div>
+          <h3>یکپارچه‌سازی آسان</h3>
+          <p>به ابزارهایی که همین الان استفاده می‌کنید وصل می‌شه، بدون دردسر مهاجرت.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="workflow">
+    <div class="container">
+      <div class="workflow">
+        <div class="workflow-inner">
+          <div>
+            <h2>از ایده تا تکمیل، در سه قدم ساده</h2>
+            <p>کارتابل طوری طراحی شده که هیچ عضوی از تیم گم نشه و هیچ کاری معلق نمونه.</p>
+            <div class="workflow-steps">
+              <div class="w-step"><span class="n">۱</span> یک وظیفه بسازید و مسئولش رو مشخص کنید</div>
+              <div class="w-step"><span class="n">۲</span> پیشرفت رو با تغییر وضعیت به‌روز کنید</div>
+              <div class="w-step"><span class="n">۳</span> در پایان هفته، گزارش کامل رو یک‌جا ببینید</div>
+            </div>
+          </div>
+          <div class="workflow-visual">
+            <div class="stat-row"><span class="stat-label">وظایف تکمیل‌شده این هفته</span><span class="stat-value up">۲۴</span></div>
+            <div class="stat-row"><span class="stat-label">در حال انجام</span><span class="stat-value">۹</span></div>
+            <div class="stat-row"><span class="stat-label">میانگین زمان تکمیل</span><span class="stat-value">۱.۸ روز</span></div>
+            <div class="stat-row"><span class="stat-label">اعضای فعال</span><span class="stat-value">۱۲</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cta">
+    <div class="container cta">
+      <div class="cta-box">
+        <h2>تیم‌تون رو همین امروز منظم کنید</h2>
+        <p>ثبت‌نام رایگانه و در کمتر از ۵ دقیقه آماده استفاده‌ست.</p>
+        <a href="#" class="btn-primary">شروع  →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+
+        <div class="footer-brand">
+          <div class="logo"><span class="logo-mark">ک</span> کارتابل</div>
+          <p>یک فضای کاری ساده برای سپردن، پیگیری و تکمیل وظایف سازمانی — بدون پیچیدگی‌های اضافه.</p>
+          <div class="footer-social">
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>محصول</h4>
+          <ul>
+            <li>ویژگی‌ها</li>
+            <li>نحوه کار</li>
+            <li>قیمت‌گذاری</li>
+            <li>به‌روزرسانی‌ها</li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>شرکت</h4>
+          <ul>
+            <li> درباره ما</li>
+            <li>فرصت‌های شغلی</li>
+            <li>وبلاگ</li>
+            <li>همکاری با ما</li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>تماس با ما</h4>
+          <ul class="footer-contact">
+            <li><span class="ico">✉️</span> alipourz971@gmail.com</li>
+            <li><span class="ico">📞</span> ۰۲۱-۹۱۰۰۰۰۰۰</li>
+            <li><span class="ico">📍</span> ...... مازندران، بابل، خیابان مدرس، شرکت </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-note"> کارتابل — این صفحه یک نمونه‌کار طراحی است</div>
+        <div class="footer-bottom-links">
+          <a href="#">حریم خصوصی</a>
+          <a href="#">قوانین استفاده</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
